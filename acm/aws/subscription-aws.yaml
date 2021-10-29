@@ -1,0 +1,16 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: bank-app
+  namespace: bank-color
+  labels:
+    app: bank-app
+  annotations:
+    apps.open-cluster-management.io/github-path: /aws-deploy
+    apps.open-cluster-management.io/git-branch: master
+spec:
+  channel: bank-app/bank-colors
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: aws-clusters
