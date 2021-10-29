@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: webapp-color
-          image: kodekloud/webapp-color:v3
+          image: kodekloud/webapp-color:v2
           ports:
             - name: http
               containerPort: 8080
