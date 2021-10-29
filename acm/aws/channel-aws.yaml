@@ -1,7 +1,7 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
-  name: colors
+  name: bank-app
   namespace: bank-color
 spec:
   type: Git
