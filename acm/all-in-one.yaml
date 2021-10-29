@@ -1,0 +1,86 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: webserver-app
+  namespace: webserver-acm
+  annotations:
+    apps.open-cluster-management.io/deployables: ''
+spec:
+  componentKinds:
+    - group: apps.open-cluster-management.io
+      kind: Subscription
+  descriptor: {}
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - webserver-app
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: webserver-app-dev
+  namespace: webserver-acm
+  annotations:
+    apps.open-cluster-management.io/deployables: 'webserver-acm/webserver-app-dev-04.application-lifecycle-exercise-application-application-resources-webserver-route,webserver-acm/webserver-app-dev-04.application-lifecycle-exercise-application-application-resources-webserver-deployment,webserver-acm/webserver-app-dev-04.application-lifecycle-exercise-application-application-resources-webserver-service,webserver-acm/webserver-app-dev-04.application-lifecycle-exercise-application-application-resources-application-prod-configmap'
+    apps.open-cluster-management.io/git-branch: dev
+    apps.open-cluster-management.io/git-path: 04.Application-Lifecycle/exercise-application/application-resources
+    apps.open-cluster-management.io/manual-refresh-time: '2021-10-29T08:27:08.477Z'
+  labels:
+    app: webserver-app
+    app.kubernetes.io/part-of: webserver-app
+spec:
+  channel: webserver-acm/webserver-app
+  placement:
+    placementRef:
+      name: dev-clusters
+      kind: PlacementRule
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: dev-clusters
+  namespace: webserver-acm
+spec:
+  clusterConditions:
+    - status: 'True'
+      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchLabels:
+      environment: dev
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: webserver-app-prod
+  namespace: webserver-acm
+  annotations:
+    apps.open-cluster-management.io/deployables: 'webserver-acm/webserver-app-prod-prod-colors-deployment,webserver-acm/webserver-app-prod-prod-color-service-service'
+    apps.open-cluster-management.io/git-branch: master
+    apps.open-cluster-management.io/git-path: /prod
+    apps.open-cluster-management.io/manual-refresh-time: '2021-10-29T08:27:08.477Z'
+  labels:
+    app: webserver-app
+    app.kubernetes.io/part-of: webserver-app
+    apps.open-cluster-management.io/reconcile-rate: medium
+spec:
+  channel: nsgithubcom-kirson-git-amazing-demo-ns/nsgithubcom-kirson-git-amazing-demo
+  placement:
+    placementRef:
+      name: prod-clusters
+      kind: PlacementRule
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: prod-clusters
+  namespace: webserver-acm
+spec:
+  clusterConditions:
+    - status: 'True'
+      type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchLabels:
+      environment: aws
+      vendor: EKS
