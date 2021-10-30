@@ -1,13 +1,12 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: aws-clusters
-  namespace: bank-color
+  name: dev-clusters
+  namespace: aws-acm
 spec:
   clusterConditions:
     - type: ManagedClusterConditionAvailable
       status: "True"
   clusterSelector:
     matchLabels:
-      environment: eks
-      location: cloud
+      env: eks

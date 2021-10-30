@@ -2,14 +2,14 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
   name: webserver-app-dev
-  namespace: webserver-acm
+  namespace: webserver-acm2
   labels:
     app: webserver-app
   annotations:
     apps.open-cluster-management.io/github-path: 04.Application-Lifecycle/exercise-application/application-resources
     apps.open-cluster-management.io/git-branch: dev
 spec:
-  channel: webserver-acm/webserver-app
+  channel: webserver-acm2/webserver-app
   placement:
     placementRef:
       kind: PlacementRule

@@ -1,16 +1,16 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
-  name: bank-app
-  namespace: bank-color
+  name: aws-app-dev
+  namespace: aws-acm
   labels:
-    app: bank-app
+    app: aws-app
   annotations:
-    apps.open-cluster-management.io/github-path: /aws-deploy
+    apps.open-cluster-management.io/github-path: aws-deploy
     apps.open-cluster-management.io/git-branch: master
 spec:
-  channel: bank-app/bank-colors
+  channel: aws-acm/aws-app
   placement:
     placementRef:
       kind: PlacementRule
-      name: aws-clusters
+      name: dev-clusters

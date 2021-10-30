@@ -1,8 +1,0 @@
-apiVersion: apps.open-cluster-management.io/v1
-kind: Channel
-metadata:
-  name: bank-app
-  namespace: bank-color
-spec:
-  type: Git
-  pathname: https://github.com/kirson-git/amazing-demo.git

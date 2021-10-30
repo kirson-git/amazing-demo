@@ -2,7 +2,7 @@ apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
   name: webserver-app
-  namespace: webserver-acm
+  namespace: webserver-acm2
 spec:
   componentKinds:
   - group: apps.open-cluster-management.io
