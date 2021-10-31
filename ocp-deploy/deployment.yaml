@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: webserver
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: color
-          image: kodekloud/webapp-color:v3
+          image: kodekloud/webapp-color:v2
           ports:
             - containerPort: 8080
               name: webserver
