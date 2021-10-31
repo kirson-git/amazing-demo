@@ -1,0 +1,8 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: webserver-app
+  namespace: ocp-color
+spec:
+  type: Git
+  pathname: https://github.com/kirson-git/amazing-demo.git
